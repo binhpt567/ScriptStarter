@@ -1,9 +1,103 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Script Starter</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>getKey for SCM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 1.2em;
+            color: #666;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        img {
+            width: 100%;
+            max-width: 200px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-<h1><%=Request.QueryString("key")%><h1>
+    <div class="container">
+    	 <img src="https://raw.githubusercontent.com/binhpt567/ScriptStarter/main/logo.png" alt="logo_scriptstarter">
+        <h1>Script Starter</h1>
+        <p id="ip">Địa chỉ IP của bạn: Đang lấy...</p>
+        <p>Sau 24h KEY sẽ bị Reset :3<p>
+        <p id="haveKey">Đang lấy...</p>
+        <button id="copyBtn" disabled>Sao chép Key</button>
+    </div>
+
+    <script>
+        function getKeyQuery(key) {
+            let queryString = window.location.search;
+            let urlParams = new URLSearchParams(queryString);
+            return urlParams.get(key);
+        }
+
+        // Sao chép giá trị của key vào clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Đã sao chép Key');
+            }).catch(err => {
+                alert('Lỗi: không thể sao chép Key!');
+                console.error('err:copy_loicopyKey', err);
+            });
+        }
+        document.addEventListener('DOMContentLoaded', (event) => {
+            let key = getKeyQuery('key');
+            let resultElement = document.getElementById('haveKey');
+            let copyBtn = document.getElementById('copyBtn');
+            if (key) {
+                resultElement.innerText = `${key}`;
+                copyButton.disabled = false;
+                copyButton.addEventListener('click', () => copyToClipboard(key));
+            } else {
+                resultElement.innerText = "Bạn chưa lấy key";
+            }
+            fetch('https://api.ipify.org?format=json') // lấy ip from api =))))
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('ip').innerText = `Địa chỉ IP của bạn: ${data.ip}`;
+                })
+                .catch(error => {
+                    document.getElementById('ip').innerText = "Không thể lấy địa chỉ IP.";
+                    console.error('err:getip_loigetip', error);
+                });
+        });
+    </script>
 </body>
 </html>
+// Script Starter!
