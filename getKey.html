@@ -18,8 +18,10 @@
             text-align: center;
             background-color: #fff;
             padding: 30px;
-            border-radius: 20px;
+            border-radius: 40px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 339px;
         }
         h1 {
             color: #333;
@@ -54,9 +56,9 @@
     <div class="container">
     	 <img src="https://raw.githubusercontent.com/binhpt567/ScriptStarter/main/logo.png" alt="logo_scriptstarter">
         <h1>Script Starter</h1>
-        <p id="ip">Địa chỉ IP của bạn: Đang lấy...</p>
-        <p>Sau 24h KEY sẽ bị Reset :3<p>
-        <p id="haveKey">Đang lấy...</p>
+        <p id="ip">Địa chỉ IP của bạn:</p>
+        <p>Sau 24h Key sẽ bị Reset :3<p>
+        <p id="haveKey">Đang lấy key...</p>
         <button id="copyBtn" disabled>Sao chép Key</button>
     </div>
 
@@ -67,7 +69,6 @@
             return urlParams.get(key);
         }
 
-        // Sao chép giá trị của key vào clipboard
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
                 alert('Đã sao chép Key');
