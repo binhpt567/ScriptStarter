@@ -84,7 +84,7 @@
             if (key) {
                 resultElement.innerText = `${key}`;
                 copyBtn.disabled = false;
-                coptBtn.addEventListener('click', () => copyToClipboard(key));
+                copyBtn.addEventListener('click', () => copyToClipboard(key));
             } else {
                 resultElement.innerText = "Bạn chưa lấy key";
             }
